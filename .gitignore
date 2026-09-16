@@ -102,3 +102,11 @@ prisma/contract.d.ts
 
 # Prisma local cache
 prisma/.cache/
+
+
+# AI coding agents / tools
+.agents/
+.cursor/
+.devin/
+.claude/
+.windsurf/

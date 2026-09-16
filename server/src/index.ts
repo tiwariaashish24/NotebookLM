@@ -3,11 +3,26 @@ import "dotenv/config";
 import { stat } from 'fs';
 import { toNodeHandler } from 'better-auth/node';
 import { auth } from './lib/auth';
+import cors from 'cors'
+import { register } from 'module';
+import { registerRoutes } from './routes';
+import { error } from 'console';
+import { errorHandler } from './middleware/error-handler-middleware';
 
 
 
 const app = express();
 const PORT = process.env.PORT;
+const clientUrl = process.env.CLIENT_URL ?? "http://localhost:3001";
+
+
+app.use(
+    cors({
+        origin: clientUrl,
+        credentials :true,
+
+    })
+);
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 // Mount express json middleware after Better Auth handler
@@ -24,6 +39,10 @@ app.get("/", (req, res) => {
 app.use("/health", (_req, res) =>{
     res.json({status: "ok"});
 });
+
+registerRoutes(app);
+
+app.use(errorHandler);
 
 
 
