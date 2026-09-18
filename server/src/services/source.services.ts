@@ -1,18 +1,26 @@
-// import { uploadPdfToCloudinary } from "../lib/cloudinary.js";
-// import { scrapeWebsite } from "../lib/firecrawl.js";
-// import { extractPdfFromBuffer } from "../lib/pdf.js";
-// import { enqueueSourceProcessing } from "../lib/source-events.js";
-// import { fetchYoutubeTranscript } from "../lib/youtube.js";
+import { uploadPdfToCloudinary } from "../lib/cloudinary.js";
+import { scrapeWebsite } from "../lib/firecrawl.js";
+import { extractPdfFromBuffer } from "../lib/pdf.js";
+import { enqueueSourceProcessing } from "../lib/source-events.js";
+import { fetchYoutubeTranscript } from "../lib/youtube.js";
+
 import {
     createSourceRecord,
     deleteSourceRecord,
     findSourceByIdAndWorkspaceId,
     findSourcesByWorkspaceId,
     type SourceRecord,
-} from "../repository/source.repsitory";
+} from "../repository/source.repsitory.js";
 
 import { NotFoundError } from "../types/app-error.js";
-import { CreateSourceInput, ImportWebsiteInput, ImportYoutubeInput, ListSourcesQuery } from "../validators/source.validator.js";
+
+import {
+    CreateSourceInput,
+    ImportWebsiteInput,
+    ImportYoutubeInput,
+    ListSourcesQuery,
+} from "../validators/source.validator.js";
+
 import { getWorkspaceByIdForUser } from "./workspace.services.js";
 
 async function assertWorkspaceAccess(workspaceId: string, userId: string) {

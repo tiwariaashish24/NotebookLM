@@ -11,16 +11,16 @@ import {
 } from "../validators/source.validator.js";
 import { workspaceIdParamSchema } from "../validators/workspace-validator.js";
 
-// import {
-//     bulkDeleteSourcesForWorkspace,
-//     createTextOrMarkdownSource,
-//     deleteSourceForWorkspace,
-//     getSourceForWorkspace,
-//     importWebsiteSource,
-//     importYoutubeSource,
-//     listSourcesForWorkspace,
-//     uploadPdfSource,
-// } from "../services/source.services.js";
+import {
+    bulkDeleteSourcesForWorkspace,
+    createTextOrMarkdownSource,
+    deleteSourceForWorkspace,
+    getSourceForWorkspace,
+    importWebsiteSource,
+    importYoutubeSource,
+    listSourcesForWorkspace,
+    uploadPdfSource,
+} from "../services/source.services.js";
 
 function parseWorkspaceId(params: Request["params"]) {
     const parsed = workspaceIdParamSchema.safeParse(params);
