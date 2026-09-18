@@ -1,4 +1,4 @@
-// import { deleteWorkspaceVectors } from "../lib/pinecone.js";
+import { deleteWorkspaceVectors } from "../lib/pinecone.js";
 
 
 import {
@@ -55,11 +55,11 @@ export async function deleteWorkspaceForUser(
 ) {
     await getWorkspaceByIdForUser(workspaceId, userId);
 
-    // try {
-    //     await deleteWorkspaceVectors(workspaceId);
-    // } catch (error) {
-    //     console.error("Failed to delete Pinecone namespace:", error);
-    // }
+    try {
+        await deleteWorkspaceVectors(workspaceId);
+    } catch (error) {
+        console.error("Failed to delete Pinecone namespace:", error);
+    }
 
-//     await deleteWorkspaceRecord(workspaceId);
+    await deleteWorkspaceRecord(workspaceId);
 }

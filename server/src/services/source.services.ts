@@ -1,7 +1,7 @@
 import { uploadPdfToCloudinary } from "../lib/cloudinary.js";
 import { scrapeWebsite } from "../lib/firecrawl.js";
 import { extractPdfFromBuffer } from "../lib/pdf.js";
-import { enqueueSourceProcessing } from "../lib/source-events.js";
+import { enqueueSourceProcessing } from "../lib/source-event.js";
 import { fetchYoutubeTranscript } from "../lib/youtube.js";
 
 import {

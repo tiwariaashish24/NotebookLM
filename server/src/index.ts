@@ -8,6 +8,10 @@ import { register } from 'module';
 import { registerRoutes } from './routes';
 import { error } from 'console';
 import { errorHandler } from './middleware/error-handler-middleware';
+import { inngest} from './inngest/client';
+import {serve} from 'inngest/express'
+import { functions } from './inngest/index.js';
+
 
 
 
@@ -28,6 +32,8 @@ app.all('/api/auth/{*any}', toNodeHandler(auth));
 // Mount express json middleware after Better Auth handler
 // or only apply it to routes that don't interact with Better Auth
 app.use(express.json());
+
+app.use("/api/inngest", serve({ client: inngest, functions}));
 
 
 

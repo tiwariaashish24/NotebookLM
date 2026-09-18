@@ -4,26 +4,25 @@ import { auth } from "../lib/auth.js";
 import type { Session } from "../lib/session.js";
 
 declare module "express-serve-static-core" {
-    interface Request{
-        session : Session;
+    interface Request {
+        session: Session;
     }
 }
-
 
 export async function requireAuth(
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<void> {
+): Promise<void> {
     const session = await auth.api.getSession({
-      headers: fromNodeHeaders(req.headers),
+        headers: fromNodeHeaders(req.headers),
     });
-  
+
     if (!session?.user) {
-      res.status(401).json({ error: "Unauthorized" });
-      return;
+        res.status(401).json({ error: "Unauthorized" });
+        return;
     }
-  
+
     req.session = session;
     next();
-  }
+}
