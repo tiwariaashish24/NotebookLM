@@ -38,12 +38,56 @@ app.use("/api/inngest", serve({ client: inngest, functions}));
 
 
 
-app.get("/", (req, res) => {
-    res.send("hello world")
+app.get("/", (_req, res) => {
+    res.json({
+        name: "notebook-api",
+        status: "ok",
+        health: "/health",
+        auth: "/api/auth/*",
+        inngest: "/api/inngest",
+        routes: {
+            workspaces: {
+                list: "GET /api/workspaces",
+                create: "POST /api/workspaces",
+                get: "GET /api/workspaces/:workspaceId",
+                update: "PATCH /api/workspaces/:workspaceId",
+                delete: "DELETE /api/workspaces/:workspaceId",
+            },
+            sources: {
+                list: "GET /api/workspaces/:workspaceId/sources",
+                create: "POST /api/workspaces/:workspaceId/sources",
+                uploadPdf: "POST /api/workspaces/:workspaceId/sources/upload",
+                importWebsite: "POST /api/workspaces/:workspaceId/sources/import/website",
+                importYoutube: "POST /api/workspaces/:workspaceId/sources/import/youtube",
+                bulkDelete: "POST /api/workspaces/:workspaceId/sources/bulk-delete",
+                get: "GET /api/workspaces/:workspaceId/sources/:sourceId",
+                delete: "DELETE /api/workspaces/:workspaceId/sources/:sourceId",
+            },
+            conversations: {
+                list: "GET /api/workspaces/:workspaceId/conversations",
+                create: "POST /api/workspaces/:workspaceId/conversations",
+                messages: "GET /api/workspaces/:workspaceId/conversations/:conversationId/messages",
+                delete: "DELETE /api/workspaces/:workspaceId/conversations/:conversationId",
+                chat: "POST /api/workspaces/:workspaceId/chat",
+            },
+            artifacts: {
+                list: "GET /api/workspaces/:workspaceId/artifacts",
+                create: "POST /api/workspaces/:workspaceId/artifacts",
+                get: "GET /api/workspaces/:workspaceId/artifacts/:artifactId",
+                delete: "DELETE /api/workspaces/:workspaceId/artifacts/:artifactId",
+            },
+            memory: {
+                list: "GET /api/memory",
+                create: "POST /api/memory",
+                update: "PATCH /api/memory/:memoryId",
+                delete: "DELETE /api/memory/:memoryId",
+            },
+        },
+    });
 });
 
-app.use("/health", (_req, res) =>{
-    res.json({status: "ok"});
+app.get("/health", (_req, res) => {
+    res.json({ status: "ok" });
 });
 
 registerRoutes(app);

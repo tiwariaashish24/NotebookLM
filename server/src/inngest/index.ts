@@ -93,4 +93,4 @@ export const summarizeConversation = inngest.createFunction(
 
 
 
-export const functions = [processSource, summarizeConversation];
+export const functions = [processSource, generateArtifact, summarizeConversation];
